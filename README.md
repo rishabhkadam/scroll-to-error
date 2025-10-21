@@ -1,40 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🧭 scroll-to-error
 
-## Getting Started
+A lightweight utility that **automatically scrolls to the first form field that has a validation error** — built for React or any JavaScript application.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🧩 **Zero dependencies** – Pure TypeScript/JavaScript utility  
+- 🪄 **Smooth scrolling** to the first invalid input  
+- 🎯 **Focuses** the error field automatically  
+- 💡 Works with **React Hook Form**, **Formik**, or any validation logic  
+- 🌍 Supports all browsers that implement `scrollIntoView`
+
+---
+
+## 📦 Installation
+
+```npm install scroll-to-error```
+
+or with Yarn:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn add scroll-to-error
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 Usage
+Basic Example
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```typescript
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+import { scrollToFirstError } from "scroll-to-error";
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  const errors = {
+    email: "Email is required",
+    password: "Password must be at least 8 characters",
+  };
 
-## Learn More
+  // Scrolls smoothly to the first field that has an error
+  scrollToFirstError(errors);
+};
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Expected HTML structure
+Make sure your form fields have the name attribute corresponding to your error keys:
 
-## Deploy on Vercel
+```html
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<form>
+  <input type="email" name="email" />
+  <input type="password" name="password" />
+</form>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```
+
+So if your errors object has { email: "Required" },
+it will scroll to 
+```html
+<input name="email" />.
+```
+
+
+### ⚙️ Function Signature
+
+function ```scrollToFirstError(errors?: Record<string, any>): void;```
+Parameters
+Name	Type	Description
+errors	Record<string, any>	An object containing validation errors. Keys must match input name attributes.
+
+### ✨ Example with React Hook Form
+```tsx
+import { useForm } from "react-hook-form";
+import { scrollToFirstError } from "scroll-to-error";
+
+export default function ExampleForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => console.log(data);
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit, () => scrollToFirstError(errors))}
+    >
+      <input {...register("email", { required: "Email is required" })} />
+      {errors.email && <p>{errors.email.message}</p>}
+
+      <input {...register("password", { required: "Password is required" })} />
+      {errors.password && <p>{errors.password.message}</p>}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+### 🧰 TypeScript Support
+Fully written in TypeScript.
+Type definitions (index.d.ts) are automatically included in the package.
+
+### 🪶 Example Output
+When your form validation fails:
+
+The page smoothly scrolls to the first invalid field.
+
+The input gains focus, helping users correct errors quickly.
+
+### 🧑‍💻 Contributing
+Contributions, issues, and feature requests are welcome!
+Feel free to open a PR or issue on the GitHub repository.
+
+### 📝 License
+This project is licensed under the MIT License – see the LICENSE file for details.
+
+### 💖 Support
+If you like this package, please ⭐ star the repo on GitHub!
+
+Made with ❤️ by Rishabh Kadam
+
+
+
+
+
+
+
+
