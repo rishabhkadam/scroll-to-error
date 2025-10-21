@@ -1,4 +1,4 @@
-# 🧭 scroll-to-error
+# scroll-to-error
 
 A lightweight utility that **automatically scrolls to the first form field that has a validation error** — built for React or any JavaScript application.
 
@@ -16,7 +16,9 @@ A lightweight utility that **automatically scrolls to the first form field that 
 
 ## 📦 Installation
 
-```npm install scroll-to-error```
+```terminal
+npm install scroll-to-error
+```
 
 or with Yarn:
 
@@ -122,12 +124,4 @@ This project is licensed under the MIT License – see the LICENSE file for deta
 ### 💖 Support
 If you like this package, please ⭐ star the repo on GitHub!
 
-Made with ❤️ by Rishabh Kadam
-
-
-
-
-
-
-
-
+Made with ❤️ by [Rishabh Kadam](https://github.com/rishabhkadam)
