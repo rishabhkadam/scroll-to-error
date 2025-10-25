@@ -1,6 +1,6 @@
 {
   "name": "scroll-to-error",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automatically scrolls to the first form field that has a validation error.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,8 @@
     "error",
     "scroll",
     "react",
-    "validation"
+    "validation",
+    "scroll-to-error"
   ],
   "repository": {
     "type": "git",
